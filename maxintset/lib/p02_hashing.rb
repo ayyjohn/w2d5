@@ -4,6 +4,14 @@ end
 
 class Array
   def hash
+    #use the index, values, length, order
+    #take i + v + (l*9999) ... hash total
+    total = 163
+    len = self.length
+    each_with_index do |el, i|
+      total += (el + i).hash
+    end
+    total.hash
   end
 end
 
