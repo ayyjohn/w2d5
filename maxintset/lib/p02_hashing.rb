@@ -9,6 +9,10 @@ class Array
     total = 163
     len = self.length
     each_with_index do |el, i|
+
+      el = el.to_s.ord if el.is_a?(Symbol)
+      el = el.ord if el.is_a?(String)
+
       total += (el + i).hash
     end
     total.hash
