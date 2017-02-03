@@ -22,6 +22,8 @@ class Link
 end
 
 class LinkedList
+  include Enumerable
+
   def initialize()
     @sentinal_one = Link.new
     @sentinal_two = Link.new
@@ -101,13 +103,27 @@ class LinkedList
 
 
   def remove(key)
+    current_link = @sentinal_one.next
+    until current_link.key == key
+      return nil if current_link.next == @sentinal_two
+      current_link = current_link.next
+    end
+
+    current_link.prev.next = current_link.next
+    current_link.next.prev = current_link.prev
   end
 
-  def each
+  def each(&prc)
+    current_link = @sentinal_one.next
+    until current_link == @sentinal_two
+      prc.call(current_link)
+      current_link = current_link.next
+    end
+    self
   end
 
   # uncomment when you have `each` working and `Enumerable` included
-  # def to_s
-  #   inject([]) { |acc, link| acc << "[#{link.key}, #{link.val}]" }.join(", ")
-  # end
+  def to_s
+    inject([]) { |acc, link| acc << "[#{link.key}, #{link.val}]" }.join(", ")
+  end
 end
