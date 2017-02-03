@@ -19,7 +19,13 @@ class Link
 end
 
 class LinkedList
-  def initialize
+  def initialize()
+    @sentinal_one = Link.new
+    @sentinal_two = Link.new
+
+    @sentinal_one.next = @sentinal_two
+    @sentinal_two.prev = @sentinal_one
+
   end
 
   def [](i)
@@ -28,12 +34,15 @@ class LinkedList
   end
 
   def first
+    @sentinal_one.next
   end
 
   def last
+    @sentinal_two.prev
   end
 
   def empty?
+    @sentinal_one.next == @sentinal_two
   end
 
   def get(key)
@@ -43,6 +52,17 @@ class LinkedList
   end
 
   def append(key, val)
+
+    # create unattached new link
+    new_link = Link.new(key, val)
+
+    #update old last
+    @sentinal_two.prev.next = new_link
+    new_link.prev = @sentinal_two.prev
+
+    #attach new link
+    @sentinal_two.prev = new_link
+    new_link.next = @sentinal_two
   end
 
   def update(key, val)
