@@ -17,6 +17,7 @@ end
 
 class String
   def hash
+    (chars.map(&:ord)).hash
   end
 end
 
