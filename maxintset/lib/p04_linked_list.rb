@@ -12,6 +12,9 @@ class Link
     "#{@key}: #{@val}"
   end
 
+  # def inspect
+  #   puts "key = #{@key}, val is #{@val}"
+  # end
   def remove
     # optional but useful, connects previous link to next link
     # and removes self from list.
@@ -66,6 +69,11 @@ class LinkedList
   end
 
   def update(key, val)
+    current_link = @sentinal_one.next
+    until current_link.key = key
+      current_link = current_link.next
+    end
+    current_link.val = val
   end
 
   def remove(key)
