@@ -12,6 +12,7 @@ class Array
 
       el = el.to_s.ord if el.is_a?(Symbol)
       el = el.ord if el.is_a?(String)
+      el = el.hash if el.is_a?(Array)
 
       total += (el + i).hash
     end
