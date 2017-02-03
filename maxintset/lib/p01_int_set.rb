@@ -1,10 +1,12 @@
 class MaxIntSet
+
   def initialize(max)
     @store = Array.new(max + 1) { false }
+    @max = max
   end
 
   def insert(num)
-    raise "that number is outside the bounds of the set" if num > max
+    raise "Out of bounds" unless is_valid?(num)
     @store[num] = true
   end
 
@@ -19,6 +21,7 @@ class MaxIntSet
   private
 
   def is_valid?(num)
+    num >= 0 && num <= @max
   end
 
   def validate!(num)
