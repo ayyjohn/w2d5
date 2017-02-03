@@ -29,6 +29,8 @@ class Hash
   # This returns 0 because rspec will break if it returns nil
   # Make sure to implement an actual Hash#hash method
   def hash
-    0
+    total = 163
+    to_a.sort.each { |sub_array| total += sub_array.hash }
+    total.hash
   end
 end
