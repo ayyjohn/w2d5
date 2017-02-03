@@ -49,13 +49,24 @@ class LinkedList
   end
 
   def get(key)
+    current_link = @sentinal_one.next
+    until current_link.key == key
+      return nil if current_link.next == @sentinal_two
+      current_link = current_link.next
+    end
+    current_link.val
   end
 
   def include?(key)
+    current_link = @sentinal_one.next
+    until current_link == @sentinal_two
+      return true if current_link.key == key
+      current_link = current_link.next
+    end
+    false
   end
 
   def append(key, val)
-
     # create unattached new link
     new_link = Link.new(key, val)
 
@@ -69,12 +80,25 @@ class LinkedList
   end
 
   def update(key, val)
+    return "wasn't there" if empty?
     current_link = @sentinal_one.next
-    until current_link.key = key
+    until current_link.key == key
+      return "wasn't there" if current_link.next == @sentinal_one
       current_link = current_link.next
     end
     current_link.val = val
   end
+
+  def render
+    current = @sentinal_one
+    until current == @sentinal_two
+      puts "key: #{current.key}, val: #{current.val}"
+      puts "prev: #{current.prev}, next: #{current.next}"
+      puts
+      current = current.next
+    end
+  end
+
 
   def remove(key)
   end
