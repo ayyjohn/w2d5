@@ -51,7 +51,8 @@ class LinkedList
   end
 
   def get(key)
-    current_link = @sentinal_one.next
+    return nil if empty?
+    current_link = @sentinal_one
     until current_link.key == key
       return nil if current_link.next == @sentinal_two
       current_link = current_link.next
@@ -60,6 +61,7 @@ class LinkedList
   end
 
   def include?(key)
+    return false if empty?
     current_link = @sentinal_one.next
     until current_link == @sentinal_two
       return true if current_link.key == key
